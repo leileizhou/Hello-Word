@@ -1,0 +1,50 @@
+<html>
+	<head></head>
+
+	<body>
+		<canvas id='myCanvas' style='width:400px;height:400px'></canvas>
+	</body>
+
+	<script type="text/javascript">
+
+        var canvasID = document.getElementById("myCanvas");
+
+        var canvas = canvasID.getContext("2d");
+
+        function drawSanjiao(id)
+
+        {
+
+               canvas.save();
+
+               canvas.translate(250,40);
+
+               canvas.lineWidth = 3;
+
+               canvas.strokeStyle = "url('img/kedu1.png')";
+
+               canvas.beginPath();
+
+               canvas.moveTo(0,0);
+
+               canvas.lineTo(0,120);
+
+               canvas.lineTo(100,60);
+
+               canvas.lineTo(0,0);
+
+               canvas.stroke();
+
+               canvas.fillStyle = 'red';
+
+               canvas.fill();
+
+               canvas.closePath();
+
+               canvas.restore();
+
+        }
+
+        drawSanjiao("myCanvas");
+	</script>
+</html>

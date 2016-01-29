@@ -1,0 +1,14 @@
+{
+  "uploadOnSave": true,
+  "deleteLocal": true,
+  "hostname": "120.26.223.73",
+  "port": "22",
+  "target": "/root/test/smart_dryer/client",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "root",
+  "transport": "scp",
+  "password": "GBGB^R&g4qs8JcY%"
+}

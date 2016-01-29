@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>小天鹅智能干衣</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="dns-prefetch" href="http://mmbiz.qpic.cn">
+    <link rel="dns-prefetch" href="http://res.wx.qq.com">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no' />
+		<link href="ganyiji.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+
+		</style>
+	</head>
+	<body>
+		<div id='beijing_test'></div>
+		<div id='ganyiji'>
+			<div id='statusBar'></div>
+			<div id='container'>
+				<!-- 头部标题-->
+				<div id='title'>
+					<div id='title_btn'></div>
+					<div id='title_name'><span>小天鹅智能干衣</span></div>
+					<div id='title_info'><span>信息</span></div>
+				</div>
+				<!-- 内容-->
+				<div id='content'>
+					<!-- 风干页 -->
+					<div id='functionsPage'>
+						<!-- 预约  -->
+						<div id='appointment' data-index='4'></div>
+						<!-- 四种风干 -->
+						<div id='functions_item'>
+							<div class='fc_type fc_one' data-index='0'></div>
+							<div id='fc_tandt'>
+								<div class='fc_type fc_two' data-index='1'></div>
+								<div class='fc_type fc_three' data-index='2'></div>
+							</div>
+							<div class='fc_type fc_four' data-index='3'></div>
+						</div>
+						<!-- 启动暂停 -->
+						<div id='action_control'>
+							<div id='jiare' class='control_item'>
+								<div id='jiare_img'></div>
+								<div id='jiare_text'>热风</div>
+							</div>
+
+
+							<div id='btn_control' class='control_item'>
+								<div id='startOrPause'></div>
+							</div>
+
+
+
+							<div id='fenggan' class='control_item'>
+								<div id='fenggan_img'></div>
+								<div id='fenggan_text'>风干</div>
+							</div>
+						</div>
+					</div>
+					<!-- 状态页 -->
+					<div id='statusPage'>
+						<div id='status_time'>
+							<div id='frontTime'>
+								<span id='appiontTime'>预约时间</span>
+								<span id='lastTime'>剩余时间</span>
+							</div>
+
+							<div id='bigTime'>12:00</div>
+						</div>
+
+						<div id='canvas_dian'>
+							<canvas id='cvs'></canvas>
+							<div id='current_dian'>0.5</div><span class='danwei'>度</span>
+							<div id='dian_below'>耗电量</div>
+						</div>
+
+						<div id='charts_container' style="min-width:320px;height:122px">
+
+						</div>
+
+
+					</div>
+					<!-- 互动页 -->
+					<div id='interactionPage'></div>
+					<!-- 商城页 -->
+					<div id='marketPage'></div>
+
+					<!--预约页-->
+					<div id='appionmentPage'>
+						<div id='appiontmentClock'></div>
+						<canvas id='canvas_kedu'></canvas>
+						<div id='time_kedu'>
+							<div id='start'>
+								<div id='start_jiao'></div>
+							</div>
+							<div id='end'>
+								<div id='end_jiao'></div>
+							</div>
+							<div id='appionment_start_time'>
+								<div id='appionment_start'>开始</div>
+								<div id='appionment_start_num'>12:00</div>
+							</div>
+							<div id='appionment_end_time'>
+								<div id='appionment_end_num'>15:00</div>
+								<div id='appionment_end'>停止</div>
+							</div>
+
+						</div>
+						<div id='time_kedu2'>
+						</div>
+					</div>
+
+				</div>
+				<div id='footer'>
+						<div id='ganyi' class='footItem' data-index='0'>
+							<div id='ganyi_img' class='footItemImg'></div>
+							<div id='ganyi_text' class='footItemText'>干衣</div>
+						</div>
+						<div id='status' class='footItem' data-index='1'>
+							<div id='status_img' class='footItemImg'></div>
+							<div id='status_text' class='footItemText'>状态</div>
+						</div>
+						<div id='interaction' class='footItem' data-index='2'>
+							<div id='interaction_img' class='footItemImg'></div>
+							<div id='interaction_text' class='footItemText'>互动</div>
+						</div>
+						<div id='market' class='footItem' data-index='3'>
+							<div id='market_img' class='footItemImg'></div>
+							<div id='market_text' class='footItemText'>商城</div>
+						</div>
+					</div>
+			</div>
+
+		</div>
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+		<script type="text/javascript">
+		$.ajax({
+			 type: "POST",
+			 url: "http://120.26.223.73/api/JsConfigs/getConfig",
+			 data: {
+				"beta": true,
+				"debug":true,
+				"jsApiList":["openWXDeviceLib"],
+				"url":'http://120.26.223.73/'
+
+			},
+			 success: function(msg){
+				 msg['beta'] = true;
+				 //msg['jsApiList'] = ["openWXDeviceLib"];
+
+				 wx.config(msg);
+
+				 wx.ready(function(){
+							// 初始化设备库函数
+							wx.invoke('openWXDeviceLib', {}, function(res){
+								 alert(res.err_msg);
+								 if(res.err_msg == 'fail'){
+									 if(res.bluetoothState == 'unauthorized'){
+										 //用户没有授权微信使用蓝牙功能
+									 }else if(res.bluetoothState == 'off'){
+										 //蓝牙没有打开
+									 }
+
+								 }
+							});
+				});
+			 }
+		});
+		</script>
+	</body>
+</html>
